@@ -1,0 +1,22 @@
+{
+  "name": "battle-api",
+  "version": "1.0.0",
+  "description": "node api for the app",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Test-Battle/Battle-API.git"
+  },
+  "author": "Ishan Gupta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Test-Battle/Battle-API/issues"
+  },
+  "homepage": "https://github.com/Test-Battle/Battle-API#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}

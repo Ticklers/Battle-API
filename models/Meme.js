@@ -17,8 +17,13 @@ const MemeSchema = new Schema({
     tpe: String,
   },
   upvotes: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+    },
+    date: {
+      type: Date,
+    },
   },
   downvotes: {
     type: Schema.Types.ObjectId,
@@ -33,6 +38,18 @@ const MemeSchema = new Schema({
       ref: "users",
     },
   },
+  isBattle: {
+    type: Boolean,
+    default: false,
+  },
+  isRoast: {
+    type: Boolean,
+    default: false,
+  },
+  onProfile: {
+    type: Boolean,
+    default: true,
+  },
 });
 
-module.exports = Meme = mongoose.model('memes', MemeSchema);
+module.exports = Meme = mongoose.model("memes", MemeSchema);

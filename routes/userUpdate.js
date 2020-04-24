@@ -26,7 +26,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage: storage, limits: { fileSize: 2* 1024 * 1024 }, fileFilter: fileFilter });
 
-router.patch("/update/:userId", (req, res, next) => {
+router.patch("/update/:userId",passport.authenticate('jwt', { session: false }), (req, res, next) => {
     const id = req.params.userId;
     User.update({ _id: id }, { $set: req.body })
       .exec()
@@ -47,7 +47,7 @@ router.patch("/update/:userId", (req, res, next) => {
       });
   });
 
-  router.patch("/avatar/:userId", upload.single('avatar'), (req, res, next) => {
+  router.patch("/avatar/:userId",passport.authenticate('jwt', { session: false }), upload.single('avatar'), (req, res, next) => {
     const id = req.params.userId;
     console.log('1');
     const updateOps = {

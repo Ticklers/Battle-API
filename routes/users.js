@@ -5,8 +5,6 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
-const passport = require('passport');
-const multer = require("multer");
 
 const validateRegisterInput = require('../validation/register');
 router.post('/register', (req, res) => {
@@ -139,6 +137,31 @@ router.post('/register', (req, res) => {
         res.status(500).json({
           error: err
         });
+      });
+  });
+
+  router.get("/:userId", (req, res, next) => {
+    const id = req.params.userId;
+    User.findById(id)
+      .exec()
+      .then(user => {
+        if (user) {
+          res.status(200).json({
+            user: user,
+            request: {
+              type: "GET",
+              url: "http://localhost:5000/users"
+            }
+          });
+        } else {
+          res
+            .status(404)
+            .json({ message: "No user found for provided id" });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ error: err });
       });
   });
 

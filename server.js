@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require("morgan");
 const passport = require('passport');
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'});
 
 mongoose.Promise = global.Promise;
 const app = express();
 app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -28,13 +30,11 @@ mongoose
 app.use('/uploads', express.static('uploads'));
 const users = require('./routes/users');
 app.use('/api/users',users);
-// const doctor = require('./routes/doctors');
-// app.use('/api/doctors',doctor);
-// const report = require('./routes/reports');
-// app.use('/api/reports',report)
+const userUpdates = require('./routes/userUpdate');
+app.use('/api/userupdate',userUpdates);
 
 app.use(passport.initialize());
-//require("./config/passport")(passport);
+require("./config/passport")(passport);
 
 app.use((req, res, next) => {
     const error = new Error("Route not found");

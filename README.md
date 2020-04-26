@@ -16,7 +16,7 @@ Alternatively API can also be fetched directly from heroku and using the respect
 **localhost:5000/api/users/login**    
 *(post) to login*  
 > body:  email, password  
-> response: sucess, token, errors
+> response: sucess, token, userId, errors
 
 **localhost:5000/api/users/register**   
 *(post) to register*  
@@ -25,7 +25,7 @@ Alternatively API can also be fetched directly from heroku and using the respect
 
 **localhost:5000/api/users/:userId**     
 *(get) to view patient by id*
-> params: id  
+> params: userId, token
 > response: user
 
 **localhost:5000/api/userupdate/**            

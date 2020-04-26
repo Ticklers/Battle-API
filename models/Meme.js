@@ -11,10 +11,10 @@ const MemeSchema = new Schema({
     default: Date.now,
   },
   caption: {
-    type: String,
+    type: String
   },
   media: {
-    tpe: String,
+    type: String
   },
   likes: {
     userId: {

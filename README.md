@@ -9,7 +9,9 @@ This will install all the required dependencies for the API. To start the server
 npm start
 ```
 *The server will run on port 5000.*  
-Alternatively API can also be fetched directly from heroku and using the respective routes. Link for route to test the [Root Path](https://agile-anchorage-04188.herokuapp.com).  
+Alternatively API can also be fetched directly from heroku and using the respective routes. Link for route to test the [Root Path](https://agile-anchorage-04188.herokuapp.com). 
+
+ https://git.heroku.com/agile-anchorage-04188.git (only for ishan)
 
 ### API Routes
 
@@ -67,3 +69,9 @@ Alternatively API can also be fetched directly from heroku and using the respect
 > params: id  
 > autherization: token  
 > response: success
+
+**localhost:5000/api/memes/media/:id**
+*(patch) to add a media to a meme*
+> params: id  
+> body: media (file)  
+> response: new link

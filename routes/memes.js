@@ -8,6 +8,25 @@ router.get('/test', (req, res) => {
     res.json({ msg: 'Meme route work' })
 });
 
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+const upload = multer({ storage: storage, limits: { fileSize: 1024 * 1024 * 5}, fileFilter: fileFilter });
+
 const validateMemesInput = require('../validation/meme');
 router.post('/post', passport.authenticate('jwt', { session: false }), (req, res) => {
     const { errors, isValid } = validateMemesInput(req.body);
@@ -26,11 +45,35 @@ router.post('/post', passport.authenticate('jwt', { session: false }), (req, res
             console.log('no user found');
             console.log(newMeme.user);
         }
-        console.log(user.memes);
         user.memes.unshift({ meme: newMeme.id });
         user.save();
     }).catch(err => console.log(err));
 });
+
+router.patch("/media/:id",passport.authenticate('jwt', { session: false }), upload.single('media'), (req, res, next) => {
+    const id = req.params.id;
+    const updateOps = {
+      media: req.file.path
+    };
+    console.log(req.file.path);
+    Meme.update({ _id: id }, { $set: updateOps })
+      .exec()
+      .then(result => {
+        res.status(200).json({
+          message: "Media uploaded",
+          request: {
+            type: "GET",
+            url: "http://localhost:5000/api/memes/findmeme/" + id
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
 
 router.get('/all', (req, res) => {
     Meme.find().sort({ date: -1 })
@@ -46,7 +89,8 @@ router.get('/all', (req, res) => {
 
 router.get('/findmeme/:id', (req, res) => {
     Meme.findById(req.params.id)
-        .then(meme => res.json(meme))
+        .then(meme => {
+            res.json(meme)})
         .catch(error => res.status(404).json({ noMemeFound: 'no Meme found with given ID' }));
 });
 

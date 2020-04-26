@@ -30,6 +30,14 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  memes: [
+    {
+      meme: {
+        type: Schema.Types.ObjectId,
+        ref: 'memes'
+      }
+    }
+  ]
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

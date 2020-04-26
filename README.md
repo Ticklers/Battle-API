@@ -25,7 +25,7 @@ Alternatively API can also be fetched directly from heroku and using the respect
 
 **localhost:5000/api/users/:userId**     
 *(get) to view patient by id*
-> params: userId, token
+> params: userId
 > response: user
 
 **localhost:5000/api/userupdate/**            
@@ -33,7 +33,7 @@ Alternatively API can also be fetched directly from heroku and using the respect
 >    authorization: token 
 
 **localhost:5000/api/users/all**   
-*(get) to get all patients*
+*(get) to get all users*
 >  response: list of users, count
 
 **localhost:5000/api/userupdate/avatar/:id**  
@@ -47,3 +47,23 @@ Alternatively API can also be fetched directly from heroku and using the respect
 > params: id  
 > body: info
 > autherization: token
+
+**localhost:5000/api/memes/all**   
+*(get) to get all memes*
+>  response: list of memes, count
+
+**localhost:5000/api/memes/post**
+*(post) to post a meme*
+>  body: meme  
+>  response: errors, meme  
+ 
+**localhost:5000/api/memes/findmeme/:id**
+*(get) to get a meme by id*
+>  params: id  
+> response: meme
+
+**localhost:5000/api/memes/delete/:id**
+*(delete) to delete a meme*
+> params: id  
+> autherization: token  
+> response: success

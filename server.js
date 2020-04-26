@@ -32,7 +32,8 @@ const users = require('./routes/users');
 app.use('/api/users',users);
 const userUpdates = require('./routes/userUpdate');
 app.use('/api/userupdate',userUpdates);
-
+const memes = require('./routes/memes');
+app.use('/api/memes',memes);
 app.use(passport.initialize());
 require("./config/passport")(passport);
 

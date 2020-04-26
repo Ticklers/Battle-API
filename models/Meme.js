@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MemeSchema = new Schema({
-  user: {
+  creator: {
     type: Schema.Types.ObjectId,
     ref: "users",
   },
@@ -10,13 +10,13 @@ const MemeSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  content: {
+  caption: {
     type: String,
   },
   media: {
     tpe: String,
   },
-  upvotes: {
+  likes: {
     userId: {
       type: Schema.Types.ObjectId,
       ref: "users",
@@ -25,10 +25,6 @@ const MemeSchema = new Schema({
       type: Date,
     },
   },
-  downvotes: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
-  },
   comments: {
     comment: {
       type: String,
@@ -36,6 +32,9 @@ const MemeSchema = new Schema({
     userId: {
       type: Schema.Types.ObjectId,
       ref: "users",
+    },
+    date: {
+      type: Date,
     },
   },
   isBattle: {

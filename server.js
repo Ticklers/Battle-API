@@ -7,6 +7,7 @@ const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 
 mongoose.Promise = global.Promise;
+
 const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
@@ -28,14 +29,22 @@ mongoose
   .catch(err => console.log(err));
 
 app.use('/uploads', express.static('uploads'));
+
 const users = require('./routes/users');
 app.use('/api/users',users);
+
 const userUpdates = require('./routes/userUpdate');
 app.use('/api/userupdate',userUpdates);
+
 const memes = require('./routes/memes');
 app.use('/api/memes',memes);
+
 const addons = require('./routes/memeAddons');
 app.use('/api/addons',addons);
+
+const battles = require('./routes/battles');
+app.use('/api/battles',battles);
+
 app.use(passport.initialize());
 require("./config/passport")(passport);
 

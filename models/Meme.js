@@ -27,18 +27,20 @@ const MemeSchema = new Schema({
       },
     }
   ],
-  comments: {
-    comment: {
-      type: String,
-    },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "users",
-    },
-    date: {
-      type: Date,
-    },
-  },
+  comments: [
+    {
+      comment: {
+        type: String,
+      },
+      userId: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      date: {
+        type: Date,
+      },
+    }
+  ],
   isBattle: {
     type: Boolean,
     default: false,

@@ -63,4 +63,19 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false }),
     }
 );
 
+router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    User.findById(req.user.id).then(user => {
+        Meme.findById(req.params.id)
+            .then(meme => {
+
+                meme.comments.unshift({
+                    userId: req.user.id,
+                    comment: req.body.comment,
+                    date: Date.now()
+                });
+                meme.save().then(meme => res.json(meme));
+            })
+    });
+});
+
 module.exports = router;

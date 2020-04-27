@@ -34,6 +34,8 @@ const userUpdates = require('./routes/userUpdate');
 app.use('/api/userupdate',userUpdates);
 const memes = require('./routes/memes');
 app.use('/api/memes',memes);
+const addons = require('./routes/memeAddons');
+app.use('/api/addons',addons);
 app.use(passport.initialize());
 require("./config/passport")(passport);
 

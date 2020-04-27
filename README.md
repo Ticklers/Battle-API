@@ -75,3 +75,15 @@ Alternatively API can also be fetched directly from heroku and using the respect
 > params: id  
 > body: media (file)  
 > response: new link
+
+**localhost:5000/api/addons/like:id**
+*(post) to like a meme*
+> params: id  
+> autherization: token  
+> response: meme  
+
+**localhost:5000/api/addons/unlike:id**
+*(post) to unlike a meme*
+> params: id  
+> autherization: token  
+> response: meme  

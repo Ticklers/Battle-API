@@ -16,15 +16,17 @@ const MemeSchema = new Schema({
   media: {
     type: String
   },
-  likes: {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "users",
-    },
-    date: {
-      type: Date,
-    },
-  },
+  likes: [
+    {
+      userId: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
+      },
+      date: {
+        type: Date,
+      },
+    }
+  ],
   comments: {
     comment: {
       type: String,

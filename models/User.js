@@ -37,6 +37,14 @@ const UserSchema = new Schema({
         ref: 'memes'
       }
     }
+  ],
+  likes: [
+    {
+      meme: {
+        type: String,
+        ref: 'memes'
+      }
+    }
   ]
 });
 

@@ -61,4 +61,6 @@ const BattleSchema = new Schema({
         type: Boolean,
         default: true
     },
-})
+});
+
+module.exports = Meme = mongoose.model("battles", BattleSchema);

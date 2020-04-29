@@ -6,7 +6,7 @@ module.exports = function validateRegisterInput(data) {
     let errors = {};
     
     if(_.isEmpty(data.name)) {
-        errors.name = 'name feild can not be empty';
+        errors.name = 'name field can not be empty';
     }
     if(!_.isEmpty(data.name)) {
         if(!validator.isLength(data.name, {min: 3, max: 40})) {
@@ -14,7 +14,7 @@ module.exports = function validateRegisterInput(data) {
         }
     }
     if(_.isEmpty(data.username)) {
-        errors.username = 'username feild can not be empty';
+        errors.username = 'username field can not be empty';
     }
     if(!_.isEmpty(data.email)) {
         if(!validator.isEmail(data.email)) {
@@ -22,10 +22,10 @@ module.exports = function validateRegisterInput(data) {
         }
     }
     if(_.isEmpty(data.email)) {
-        errors.email = 'email feild can not be empty';
+        errors.email = 'email field can not be empty';
     }
     if(_.isEmpty(data.password)) {
-        errors.password = 'password feild can not be empty';
+        errors.password = 'password field can not be empty';
     }
     if(_.isEmpty(data.confirmPassword)) {
         errors.confirmPassword = 'confirm password can not be empty';

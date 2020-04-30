@@ -45,6 +45,22 @@ const UserSchema = new Schema({
         ref: 'memes'
       }
     }
+  ],
+  followers: [
+    {
+      follower: {
+        type: String,
+        ref: 'users'
+      }
+    }
+  ],
+  followings: [
+    {
+      following: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+      }
+    }
   ]
 });
 

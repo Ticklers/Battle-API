@@ -105,3 +105,9 @@ Alternatively API can also be fetched directly from heroku and using the respect
 *(get) to get the battle with given id*
 > params: id
 > response: battle 
+
+**localhost:5000/api/userupdate/follow/:id**
+*(post) to follow or unfollow user with given id*
+> params: id  
+> authorization: token  
+> response: message, current user, user with given id

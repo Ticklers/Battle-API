@@ -86,5 +86,50 @@ router.patch("/update/:userId",passport.authenticate('jwt', { session: false }),
       });
     }
   );
+
+  router.post('/follow/:id',passport.authenticate('jwt', {session: false}), (req,res) => {
+    User.findById(req.user.id).then(user => {
+      User.findById(req.params.id).then(otherUser => {
+        if(otherUser){
+          if(user.followings.filter(item => item.following.toString() ===req.params.id).length > 0)
+          {
+            var removeIndex = user.followings
+                                  .map(item => item.following.toString())
+                                  .indexOf(req.params.id);
+            user.followings.splice(removeIndex, 1);
+
+            removeIndex = otherUser.followers
+                                    .map(item => item.follower.toString())
+                                    .indexOf(req.user.id);
+            otherUser.followers.splice(removeIndex, 1);
+
+            user.save();
+            otherUser.save();
+            
+            return res.status(200).json({
+              message: user.username + " has unfollowed " + otherUser.username,
+              user: user,
+              otherUser: otherUser
+            });
+          }
+
+          user.followings.unshift({following: req.params.id});
+          otherUser.followers.unshift({follower: req.user.id});
+          user.save();
+          otherUser.save();
+
+          return res.status(200).json({
+            message: user.username + " is now following " + otherUser.username,
+            user: user,
+            otherUser: otherUser
+          });
+        }
+
+        else {
+          return res.status(404).json({NotFound: "user not found"});
+        }
+      })
+    })
+  })
   
   module.exports = router;

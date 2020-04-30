@@ -6,6 +6,15 @@ const MemeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
+  name: {
+    type: String
+  },
+  avatar: {
+    type: String
+  },
+  username: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now,

@@ -36,7 +36,10 @@ router.post('/post', passport.authenticate('jwt', { session: false }), (req, res
   const newMeme = new Meme({
     caption: req.body.caption,
     media: req.body.media,
-    user: req.user.id
+    user: req.user.id,
+    username: req.user.username,
+    name: req.user.name,
+    avatar: req.user.avatar
   });
 
   newMeme.save().then(meme => res.json(meme));

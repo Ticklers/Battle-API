@@ -4,16 +4,16 @@ const bodyParser = require('body-parser');
 const morgan = require("morgan");
 const passport = require('passport');
 const multer = require('multer');
-const upload = multer({dest: 'uploads/'});
+// const upload = multer({dest: 'uploads/'});
 
 mongoose.Promise = global.Promise;
 
 const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -28,38 +28,38 @@ mongoose
   .then(() => console.log("MongoDB Connected Succesfully"))
   .catch(err => console.log(err));
 
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
 
 const users = require('./routes/users');
-app.use('/api/users',users);
+app.use('/api/users', users);
 
 const userUpdates = require('./routes/userUpdate');
-app.use('/api/userupdate',userUpdates);
+app.use('/api/userupdate', userUpdates);
 
 const memes = require('./routes/memes');
-app.use('/api/memes',memes);
+app.use('/api/memes', memes);
 
 const addons = require('./routes/memeAddons');
-app.use('/api/addons',addons);
+app.use('/api/addons', addons);
 
 const battles = require('./routes/battles');
-app.use('/api/battles',battles);
+app.use('/api/battles', battles);
 
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
 app.use((req, res, next) => {
-    const error = new Error("Route not found");
-    error.status = 404;
-    next(error);
+  const error = new Error("Route not found");
+  error.status = 404;
+  next(error);
 });
 app.use((error, req, res, next) => {
-    res.status(error.status || 500);
-    res.json({
-      error: {
-        message: error.message
-      }
-    });
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message
+    }
+  });
 
 });
 

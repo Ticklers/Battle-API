@@ -61,6 +61,14 @@ const UserSchema = new Schema({
         ref: 'users'
       }
     }
+  ],
+  feed: [
+    {
+      meme: {
+        type: Schema.Types.ObjectId,
+        ref: 'memes'
+      }
+    }
   ]
 });
 

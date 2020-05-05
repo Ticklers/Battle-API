@@ -45,6 +45,9 @@ app.use('/api/addons',addons);
 const battles = require('./routes/battles');
 app.use('/api/battles',battles);
 
+const feed = require('./routes/feed');
+app.use('/api/feed', feed);
+
 app.use(passport.initialize());
 require("./config/passport")(passport);
 

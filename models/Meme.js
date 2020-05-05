@@ -22,7 +22,7 @@ const MemeSchema = new Schema({
   caption: {
     type: String
   },
-  media: {
+  mediaLink: {
     type: String
   },
   likes: [

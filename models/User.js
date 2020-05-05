@@ -16,7 +16,7 @@ const UserSchema = new Schema({
   },
   avatar: {
     type: String,
-    default: "default avatar path here",
+    default: "https://i.pinimg.com/236x/a4/af/12/a4af1288eab8714320fa8453f72d79fd--yahoo-image-search.jpg",
   },
   username: {
     type: String,

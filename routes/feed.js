@@ -33,5 +33,11 @@ router.get('/test', (req, res) => {
     })
 })
 
+router.get('/dummy', passport.authenticate('jwt', {session: false}), (req,res) => {
+    User.findById("5ea4889cc9c66000242467c5").then(user => {
+        return res.json(user.memes);
+    })
+})
+
 
 module.exports = router;

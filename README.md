@@ -111,3 +111,8 @@ Alternatively API can also be fetched directly from heroku and using the respect
 > params: id  
 > authorization: token  
 > response: message, current user, user with given id
+
+**localhost:5000/api/feed/dummy**
+*(get) to get dummy feed*
+> authorization: token   
+> response: an array of memes id

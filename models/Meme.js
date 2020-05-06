@@ -41,6 +41,12 @@ const MemeSchema = new Schema({
       comment: {
         type: String,
       },
+      avatar: {
+        type: String,
+      },
+      username: {
+        type: String,
+      },
       userId: {
         type: Schema.Types.ObjectId,
         ref: "users",

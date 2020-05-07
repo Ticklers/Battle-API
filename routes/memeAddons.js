@@ -70,6 +70,8 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
 
                 meme.comments.unshift({
                     userId: req.user.id,
+                    avatar: req.user.avatar,
+                    username: req.user.username,
                     comment: req.body.comment,
                     date: Date.now()
                 });

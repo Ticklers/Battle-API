@@ -91,7 +91,7 @@ router.post('/login', (req, res) => {
 
         jwt.sign(
           payload,
-          keys.secretOrKey,,
+          keys.secretOrKey,
           (err, token) => {
             res.json({
               success: true,

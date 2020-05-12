@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Search page</title>
+    <script type="text/javascript">
+      var showResults = debounce(function (arg) {
+        var value = arg.trim();
+        if (value == "" || value.length <= 0) {
+          $("#search-results").fadeOut();
+          return;
+        } else {
+          $("#search-results").fadeIn();
+        }
+        var vquery = $.get(
+          "localhost:5000/api/feed/search?q=" + value,
+          function (data) {
+            $("#search-results").html("");
+          }
+        )
+          .done(function (data) {
+            if (data.length === 0) {
+              $("#search-results").append(
+                '<p class="lead-text-center mt-2">No results</p>'
+              );
+            } else {
+              data.forEach((x) => {
+                $("#search-results").append('<a href = "#"><p></p></a>');
+              });
+            }
+          })
+          .fail(function (err) {
+            console.log(err);
+          });
+      }, 200);
+    </script>
+  </head>
+  <body>
+    <input
+      aria-label="Search"
+      class="form control"
+      onkeyup="showResults(this.value)"
+    />
+  </body>
+</html>

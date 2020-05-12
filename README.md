@@ -1,118 +1,149 @@
 # Battle-API
+
 ## Node API
+
 This application is based on REST API build in node.js. API is deployed on heroku at https://agile-anchorage-04188.herokuapp.com/ . To set up the node API move to the node_api directory and run the following command in terminal/command prompt:
+
 ```
 npm install
 ```
+
 This will install all the required dependencies for the API. To start the server run the following command in your terminal/command prompt:
+
 ```
 npm start
 ```
-*The server will run on port 5000.*  
-Alternatively API can also be fetched directly from heroku and using the respective routes. Link for route to test the [Root Path](https://agile-anchorage-04188.herokuapp.com). 
 
- https://git.heroku.com/agile-anchorage-04188.git (only for ishan)
+_The server will run on port 5000._  
+Alternatively API can also be fetched directly from heroku and using the respective routes. Link for route to test the [Root Path](https://agile-anchorage-04188.herokuapp.com).
+
+https://git.heroku.com/agile-anchorage-04188.git (only for ishan)
 
 ### API Routes
 
-**localhost:5000/api/users/login**    
-*(post) to login*  
-> body:  email, password  
+**localhost:5000/api/users/login**  
+_(post) to login_
+
+> body: email, password  
 > response: sucess, token, userId, errors
 
-**localhost:5000/api/users/register**   
-*(post) to register*  
->    body:    name, email, password, age, username ,confirmPassword   
->    resopnse: success, user, errors  
+**localhost:5000/api/users/register**  
+_(post) to register_
 
-**localhost:5000/api/users/:userId**     
-*(get) to view patient by id*
+> body: name, email, password, age, username ,confirmPassword  
+>  resopnse: success, user, errors
+
+**localhost:5000/api/users/:userId**  
+_(get) to view patient by id_
+
 > params: userId
 > response: user
 
-**localhost:5000/api/userupdate/**            
-*(delete) to delete profile with authorization*
->    authorization: token 
+**localhost:5000/api/userupdate/**  
+_(delete) to delete profile with authorization_
 
-**localhost:5000/api/users/all**   
-*(get) to get all users*
->  response: list of users, count
+> authorization: token
+
+**localhost:5000/api/users/all**  
+_(get) to get all users_
+
+> response: list of users, count
 
 **localhost:5000/api/userupdate/avatar/:id**  
-*(patch) to upload avatar*
+_(patch) to upload avatar_
+
 > params: id  
 > body(file): image
 > autherization: token
 
 **localhost:5000/api/userupdate/update/:id**  
-*(patch) to update info*
+_(patch) to update info_
+
 > params: id  
 > body: info
 > autherization: token
 
-**localhost:5000/api/memes/all**   
-*(get) to get all memes*
->  response: list of memes, count
+**localhost:5000/api/memes/all**  
+_(get) to get all memes_
+
+> response: list of memes, count
 
 **localhost:5000/api/memes/post**
-*(post) to post a meme*
->  body: meme  
->  response: errors, meme  
- 
+_(post) to post a meme_
+
+> body: meme  
+>  response: errors, meme
+
 **localhost:5000/api/memes/findmeme/:id**
-*(get) to get a meme by id*
->  params: id  
+_(get) to get a meme by id_
+
+> params: id  
 > response: meme
 
 **localhost:5000/api/memes/delete/:id**
-*(delete) to delete a meme*
+_(delete) to delete a meme_
+
 > params: id  
 > autherization: token  
 > response: success
 
 **localhost:5000/api/memes/media/:id**
-*(patch) to add a media to a meme*
+_(patch) to add a media to a meme_
+
 > params: id  
 > body: media (file)  
 > response: new link
 
 **localhost:5000/api/addons/like/:id**
-*(post) to like a meme*
+_(post) to like a meme_
+
 > params: id  
 > autherization: token  
-> response: meme  
+> response: meme
 
 **localhost:5000/api/addons/unlike/:id**
-*(post) to unlike a meme*
+_(post) to unlike a meme_
+
 > params: id  
 > autherization: token  
-> response: meme  
+> response: meme
 
 **localhost:5000/api/battles/create**
-*(post) to create a meme*
+_(post) to create a meme_
+
 > body: name  
-> response: battle  
+> response: battle
 
 **localhost:5000/api/battles/getinvitation/:id**
-*(post) to get invitation link*
+_(post) to get invitation link_
+
 > params: id
-> response: battle invitation link  
+> response: battle invitation link
 
 **localhost:5000/api/battles/all**
-*(get) to get a list of all the battles*
+_(get) to get a list of all the battles_
 
 **localhost:5000/api/battles/find/:id**
-*(get) to get the battle with given id*
+_(get) to get the battle with given id_
+
 > params: id
-> response: battle 
+> response: battle
 
 **localhost:5000/api/userupdate/follow/:id**
-*(post) to follow or unfollow user with given id*
+_(post) to follow or unfollow user with given id_
+
 > params: id  
 > authorization: token  
 > response: message, current user, user with given id
 
 **localhost:5000/api/feed/dummy**
-*(get) to get dummy feed*
-> authorization: token   
+_(get) to get dummy feed_
+
+> authorization: token  
 > response: an array of memes id
+
+**localhost:5000/api/feed/search**  
+_(get) to get user search items_
+
+> query: search query for partial search  
+> response: items matching the query

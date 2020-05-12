@@ -1,9 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const passport = require('passport');
-const multer = require('multer');
+const passport = require("passport");
+const multer = require("multer");
+const path = require("path");
 // const upload = multer({dest: 'uploads/'});
 
 mongoose.Promise = global.Promise;
@@ -15,7 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   next();
 });
 
@@ -24,29 +28,37 @@ app.get("/", (req, res) => res.send("Root path of the app"));
 const db = require("./config/keys").mongoURI;
 
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
   .then(() => console.log("MongoDB Connected Succesfully"))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 // app.use('/uploads', express.static('uploads'));
 
-const users = require('./routes/users');
-app.use('/api/users', users);
+const users = require("./routes/users");
+app.use("/api/users", users);
 
-const userUpdates = require('./routes/userUpdate');
-app.use('/api/userupdate', userUpdates);
+const userUpdates = require("./routes/userUpdate");
+app.use("/api/userupdate", userUpdates);
 
-const memes = require('./routes/memes');
-app.use('/api/memes', memes);
+const memes = require("./routes/memes");
+app.use("/api/memes", memes);
 
-const addons = require('./routes/memeAddons');
-app.use('/api/addons', addons);
+const addons = require("./routes/memeAddons");
+app.use("/api/addons", addons);
 
-const battles = require('./routes/battles');
-app.use('/api/battles', battles);
+const battles = require("./routes/battles");
+app.use("/api/battles", battles);
 
-const feed = require('./routes/feed');
-app.use('/api/feed', feed);
+const feed = require("./routes/feed");
+app.use("/api/feed", feed);
+
+app.get("/search", function (req, res) {
+  res.sendFile(path.join(__dirname + "/header.html"));
+});
 
 app.use(passport.initialize());
 require("./config/passport")(passport);
@@ -60,10 +72,9 @@ app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
     error: {
-      message: error.message
-    }
+      message: error.message,
+    },
   });
-
 });
 
 const port = process.env.PORT || 5000;

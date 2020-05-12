@@ -87,13 +87,6 @@ _(delete) to delete a meme_
 > autherization: token  
 > response: success
 
-**localhost:5000/api/memes/media/:id**
-_(patch) to add a media to a meme_
-
-> params: id  
-> body: media (file)  
-> response: new link
-
 **localhost:5000/api/addons/like/:id**
 _(post) to like a meme_
 

@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const passport = require("passport");
 const multer = require("multer");
 const path = require("path");
+var cors = require("cors");
 // const upload = multer({dest: 'uploads/'});
 
 mongoose.Promise = global.Promise;
@@ -14,19 +15,29 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
 
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Headers", "PUT, POST, PATCH, DELETE, GET");
-    return res.status(2000).json({});
-  }
-  next();
-});
+//   if (req.method === "OPTIONS") {
+//     res.header("Access-Control-Allow-Headers", "PUT, POST, PATCH, DELETE, GET");
+//     return res.status(2000).json({});
+//   }
+//   next();
+// });
+
+app.use(
+  cors({
+    allowedHeaders: ["sessionId", "Content-Type"],
+    exposedHeaders: ["sessionId"],
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+  })
+);
 
 app.get("/", (req, res) => res.send("Root path of the app"));
 

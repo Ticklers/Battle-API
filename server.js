@@ -23,8 +23,11 @@ app.use(function (req, res, next) {
   );
 
   if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Headers", "PUT, POST, PATCH, DELETE, GET");
-    return res.status(2000).json({});
+    res.header(
+      "Access-Control-Allow-Headers",
+      "PUT, POST, PATCH, DELETE, GET, OPTIONS"
+    );
+    return res.status(200).json({});
   }
   next();
 });

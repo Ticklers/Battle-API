@@ -1,14 +1,15 @@
 class Chat {
-    constructor(roomTitle, namespace) {
-        this.roomTitle = roomTitle;
+    constructor(online, namespace, roomId) {
+        this.online = online;
         this.namespace = namespace;
-        this.chatHistory = [];
+        this.roomId = roomId;
+        this.messages = [];
     }
     addMessage(message) {
-        this.chatHistory.push(message);
+        this.messages.push(message);
     }
     clearHistory() {
-        this.chatHistory = [];
+        this.messages = [];
     }
 }
 

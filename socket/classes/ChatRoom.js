@@ -1,16 +1,21 @@
 class ChatRoom {
-    constructor(roomId, roomTitle, namespace, privateRoom = true) {
+    constructor(roomId, username, namespace, avatar, lastMessage, time, unseenMessages, unseenMessagesCount, messageSeenEnum) {
         this.roomId = roomId;
-        this.roomTitle = roomTitle;
+        this.username = username;
         this.namespace = namespace;
-        this.privateRoom = privateRoom;
-        // this.history = [];
+        this.avatar = avatar;
+        this.lastMessage = lastMessage;
+        this.time = time;
+        this.unseenMessages = unseenMessages;
+        this.unseenMessagesCount = unseenMessagesCount;
+        this.messageSeenEnum = messageSeenEnum;
+        // this.messages = [];
     }
     // addMessage(message) {
-    //     this.history.push(message);
+    //     this.messages.push(message);
     // }
     // clearHistory() {
-    //     this.history = [];
+    //     this.messages = [];
     // }
 }
 

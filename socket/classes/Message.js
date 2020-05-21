@@ -1,10 +1,10 @@
 class Message {
-    constructor(userName, avatar, text, mediaLink = null, userId, time) {
-        this.userName = userName;
-        this.avatar = avatar;
-        this.text = text;
-        this.mediaLink = mediaLink;
+    constructor(username, message, mediaLink = null, userId, time, messageSenderEnum) {
+        this.message = message;
         this.userId = userId;
+        this.username = username;
+        this.mediaLink = mediaLink;
+        this.messageSenderEnum = messageSenderEnum;
         this.time = time;
     }
 }

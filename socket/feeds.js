@@ -5,7 +5,7 @@ async function feed(io, socket) {
 
     console.log('Inside feed!!!!');
     var allMemes = await getAllMemes();
-    io.emit('memes', { data: allMemes });
+    socket.emit('memes', { data: allMemes });
 }
 async function newFeed(io, socket, post) {
     console.log(post);

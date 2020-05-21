@@ -16,27 +16,36 @@ async function socketMain(io, socket) {
     // loop through each namespace and listen for a connection
     namespaces.forEach((namespace) => {
         //server listening on specified endpoint for event = connection
+        // console.log(namespace);
+        // console.log('!!!!!!!!!');
         io.of(namespace.endpoint).on('connection', (nsSocket) => {
+            nsSocket.on('disconnect', () => {
+                console.log(`${nsSocket.id}  get disconnected`);
+            })
             // console.log(namespace.endpoint);
             console.log(`${nsSocket.id} has join ${namespace.endpoint}`);
             // Send back all chats list to the client
             nsSocket.emit('chatRoomsList', namespace.chatRooms);
-            nsSocket.on('joinRoom', (roomToJoin) => {
-                console.log(roomToJoin);
+            nsSocket.on('joinRoom', (JoinroomId) => {
+                io.of(namespace.endpoint).clients((error, clients) => {
+                    console.log(`There are ${clients.length} in this room`);
+                });
+
+                console.log(JoinroomId);
                 if (Object.keys(nsSocket.rooms)[1]) {
                     console.log(nsSocket.rooms);
                     const roomToLeave = Object.keys(nsSocket.rooms)[1];
                     console.log(roomToLeave);
                     nsSocket.leave(roomToLeave);
                 }
-                nsSocket.join(roomToJoin);
+                nsSocket.join(JoinroomId);
                 const nsChatRoom = namespace.chatRooms.find((room) => {
-                    return room.roomTitle === roomToJoin;
+                    return room.roomId === JoinroomId;
                 });
                 // console.log(nsChatRoom);
-                const chatToSend = chatsData[nsChatRoom.roomId];
+                // const chatToSend = chatsData[nsChatRoom.roomId];
 
-                nsSocket.emit('chatData', chatToSend);
+                nsSocket.emit('chatData', nsChatRoom);
             });
         })
     })

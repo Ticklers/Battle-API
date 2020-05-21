@@ -25,6 +25,9 @@ const MemeSchema = new Schema({
   mediaLink: {
     type: String
   },
+  mediaHash: {
+    type: String
+  },
   likes: [
     {
       userId: {

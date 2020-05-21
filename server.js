@@ -6,11 +6,25 @@ const passport = require("passport");
 const multer = require("multer");
 const path = require("path");
 var cors = require("cors");
+const socketMain = require('./socket/socketMain');
+// let namespaces = require('./data/namespaces');
 // const upload = multer({dest: 'uploads/'});
 
 mongoose.Promise = global.Promise;
 
 const app = express();
+const socketio = require('socket.io');
+const port = process.env.PORT || 5000;
+
+const expressServer = app.listen(port, () => console.log("server is running on port: " + port));
+
+const io = socketio(expressServer);
+
+io.on('connection', (socket) => {
+  socketMain(io, socket);
+  console.log('New Socket has been connected ', socket.id);
+})
+
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -96,6 +110,3 @@ app.use((error, req, res, next) => {
   });
 });
 
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => console.log("server is running on port: " + port));

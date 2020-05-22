@@ -1,6 +1,6 @@
 class Chat {
-    constructor(online, namespace, roomId) {
-        this.online = online;
+    constructor(namespace, roomId) {
+        // this.online = online;
         this.namespace = namespace;
         this.roomId = roomId;
         this.messages = [];

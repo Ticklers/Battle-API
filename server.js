@@ -7,6 +7,8 @@ const multer = require("multer");
 const path = require("path");
 var cors = require("cors");
 const socketMain = require('./socket/socketMain');
+const nsSocketMain = require('./socket/nsSocketMain');
+const { namespaces, chatsData } = require('./socket/data/namespaces');
 // let namespaces = require('./data/namespaces');
 // const upload = multer({dest: 'uploads/'});
 
@@ -19,11 +21,21 @@ const port = process.env.PORT || 5000;
 const expressServer = app.listen(port, () => console.log("server is running on port: " + port));
 
 const io = socketio(expressServer);
-
+// default ns connection
 io.on('connection', (socket) => {
   socketMain(io, socket);
-  console.log('New Socket has been connected ', socket.id);
-})
+  console.log(socket.rooms)
+  console.log('New Socket has been connected to default ns ', socket.id);
+});
+
+// other ns connection
+namespaces.forEach((namespace) => {
+  io.of(namespace.endpoint).on('connection', (nsSocket) => {
+    // console.log(namespace.endpoint);
+    nsSocketMain(io, nsSocket, namespace);
+    console.log('New nsSocket has been connected ', nsSocket.id);
+  });
+});
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());

@@ -1,6 +1,7 @@
 class ChatRoom {
-    constructor(roomId, username, namespace, avatar, lastMessage, time, unseenMessages, unseenMessagesCount, messageSeenEnum) {
+    constructor(roomId, online, username, namespace, avatar, lastMessage, time, unseenMessages, unseenMessagesCount, messageSeenEnum) {
         this.roomId = roomId;
+        this.online = online;
         this.username = username;
         this.namespace = namespace;
         this.avatar = avatar;

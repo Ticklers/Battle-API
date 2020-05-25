@@ -140,3 +140,9 @@ _(get) to get user search items_
 
 > query: search query for partial search  
 > response: items matching the query
+
+**localhost:5000/api/users/:username**  
+_(get) to view patient by username_
+
+> params: username
+> response: user
